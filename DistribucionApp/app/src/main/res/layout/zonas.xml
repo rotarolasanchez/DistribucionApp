@@ -1,0 +1,185 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    tools:context=".ZonaActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView9"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="IDENTIFICADOR"
+                    android:id="@+id/textView1"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance"
+                    android:layout_weight="4" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etidenzona"
+                    android:hint=""
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="CODIGO"
+                    android:id="@+id/textView49"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance"
+                    android:layout_weight="4" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etcodzona"
+                    android:hint=""
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="DESCRIPCION"
+                    android:id="@+id/textView50"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance"
+                    android:layout_weight="4" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etdesczona"
+                    android:hint=""
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btninserzona"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="INGRESAR" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/btnconsultaridzona"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="CONSULTAR ID" />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btnconsultarzonas"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="CONSULTAR ZONAS" />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btnactualizarzonas"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="ACTUALIZAR ZONA" />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btneliminarzona"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="ELIMINAR ZONA" />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtresultado"
+                        android:layout_width="15dp"
+                        android:layout_height="300dp"
+                        android:layout_column="1"
+                        android:layout_weight="4"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance" />
+
+            </TableRow>
+
+
+
+
+        </TableLayout>
+
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    tools:context=".PedidoCabeceraActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView5" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="CODIGO CABECERA"
+                    android:id="@+id/textView67"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance"
+                    android:layout_weight="4" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etcodcabpedido"
+                    android:hint=""
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="VENDEDOR"
+                    android:id="@+id/textView22"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance"
+                    android:layout_weight="4" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etvendpedido"
+                    android:hint=""
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="DIRECCION"
+                    android:id="@+id/textView42"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance"
+                    android:layout_weight="4" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etdirpedidocabecera"
+                    android:hint=""
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
+
+                <Button
+                    android:id="@+id/btninserclientepedidocabecera"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="CLIENTE" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etclientepedidocabecera"
+                    android:hint=""
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etobservaciondetallecabecera"
+                    android:hint="INGRESE OBSERVACION"
+                    android:editable="true"
+                    android:enabled="true"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btninserpedidocabecera"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="IR A DETALLE" />
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtresultado"
+                    android:layout_width="15dp"
+                    android:layout_height="300dp"
+                    android:layout_column="1"
+                    android:layout_weight="4"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance" />
+
+            </TableRow>
+
+
+
+
+
+
+
+
+        </TableLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

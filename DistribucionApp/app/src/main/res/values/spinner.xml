@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="Compania" >
+        <item >01-VISTONY S.A.C.</item>
+        <item >03-TOLBRIN S.A.C.</item>
+        <item >10-SKOL S.A.C.</item>
+        <!-- <item >06-COILSA S.A.C.</item>
+        <item >50-INDUVIS COMPAÑIA INDUSTRIAL DEL ECUADOR S.A.</item>
+        <item >51-INDUVIS CIA INDUSTRIAL DE PARAGUAY S.A.</item>
+        <item >52-INDUVIS S.R.L.</item>
+        <item >53-TRIBOL S.A.C.</item>   -->
+    </string-array>
+
+    <string-array name="Meses" >
+        <item >ENERO</item>
+        <item >FEBRERO</item>
+        <item >MARZO</item>
+        <item >ABRIL</item>
+        <item >MAYO</item>
+        <item >JUNIO</item>
+        <item >JULIO</item>
+        <item >AGOSTO</item>
+        <item >SETIEMBRE</item>
+        <item >OCTUBRE</item>
+        <item >NOVIEMBRE</item>
+        <item >DICIEMBRE</item>
+    </string-array>
+
+
+
+
+
+</resources>
