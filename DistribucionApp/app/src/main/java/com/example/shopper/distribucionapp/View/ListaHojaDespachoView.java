@@ -102,8 +102,8 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                //android.support.v4.app.DialogFragment dialogFragment = new MenuDialog();
-                //dialogFragment.show(getSupportFragmentManager(),"un dialogo");
+                android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialog();
+                dialogFragment.show(getSupportFragmentManager(),"un dialogo");
                 for(int j=0;j<EDespachos.size();j++)
                 {
                     if(position==j)
@@ -113,7 +113,6 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                 }
 
-                //Obtenerdireccion();
             }
         });
 
@@ -266,7 +265,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             holder.lblcant.setText(clienteNew.LegalNumber + "");
             holder.lblume.setText(clienteNew.State + "");
 
-//            view.setTag(EDespachos.get(position).getShiptonum());
+            //view.setTag(EDespachos.get(position).getShiptonum());
 
 
 

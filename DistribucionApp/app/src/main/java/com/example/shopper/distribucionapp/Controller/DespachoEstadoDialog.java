@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.logging.Handler;
 
 import static com.example.shopper.distribucionapp.R.id.etfechadespacho;
-import static com.example.shopper.distribucionapp.R.id.etlistaprecio;
+
 
 /**
  * Created by Shopper on 28/03/2018.

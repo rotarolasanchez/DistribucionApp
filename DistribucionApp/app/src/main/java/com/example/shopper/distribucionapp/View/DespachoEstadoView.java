@@ -80,7 +80,7 @@ public class DespachoEstadoView extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(Integer s) {
             //resultado.setText(s);
             //super.onPostExecute(s);
-        }
+    }
     }
 
 

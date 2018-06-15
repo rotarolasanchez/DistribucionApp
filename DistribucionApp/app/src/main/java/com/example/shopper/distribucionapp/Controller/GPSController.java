@@ -38,7 +38,7 @@ public class GPSController extends Service implements LocationListener {
     //Create a GetLocation Method //
     public  Location getLocation(){
         //location.reset();
-        MapsActivity mapsActivity = new MapsActivity();
+        //MapsActivity mapsActivity = new MapsActivity();
         try{
 
             //if(getLocation()!=null)

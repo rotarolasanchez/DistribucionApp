@@ -9,29 +9,33 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.shopper.distribucionapp.R;
 
 
 /**
  * Created by Shopper on 01/05/2018.
  */
 
-public class MenuDialog extends DialogFragment {
-/*
+public class MenuDialog extends DialogFragment
+        //implements View.OnClickListener
+
+{
+
+    /*
     Button mapa, hojavisita;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-
 /*
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    View view = getActivity().getLayoutInflater().inflate(R.layout.MenuDialog,null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+       // View view = getActivity().getLayoutInflater().inflate(R.layout.MenuDialog,null);
 
-        builder.setView(view)
-            .setTitle("Elegir Estado de Despacho:")
-    //.setIcon(android.R.drawable.btn_dialog)
-                .setPositiveButton("Guardar Estado",new DialogInterface.OnClickListener(){
+         builder.setView(view)
+               .setTitle("Elegir Estado de Despacho:")
+        .setIcon(android.R.drawable.btn_dialog)
+                 .setPositiveButton("Guardar Estado",new DialogInterface.OnClickListener(){
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
@@ -48,7 +52,11 @@ public class MenuDialog extends DialogFragment {
     }
                 );
         return builder.create();
-}
+
+    }
+
+
+
     public int boolToInt(boolean b)
     {
         return b ? 1 : 0;
@@ -58,17 +66,19 @@ public class MenuDialog extends DialogFragment {
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.btnconsultamapacliente:
+            ///case R.id.btnconsultamapacliente:
 
-            case R.id.btnactualizaestadodespacho:
+           // case R.id.btnactualizaestadodespacho:
 
 
-                break;
+               // break;
             default:
                 break;
         }
     }
-    */
+
 
     }
+    */
 
+}

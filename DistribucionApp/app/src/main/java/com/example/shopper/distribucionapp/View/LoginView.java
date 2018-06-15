@@ -108,7 +108,7 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
                 startActivity(intent);
                 finish();
             }else{
-                Toast.makeText(context, "Equipo no autorizado al usuario", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Equipo no autorizado al MenuDialog", Toast.LENGTH_LONG).show();
             }
         }
 
