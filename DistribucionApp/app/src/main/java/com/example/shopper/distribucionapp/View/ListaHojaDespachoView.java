@@ -5,9 +5,11 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,14 +21,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopper.distribucionapp.Controller.GPSController;
 import com.example.shopper.distribucionapp.Controller.DespachoEstadoDialog;
+import com.example.shopper.distribucionapp.Controller.MenuDialogController;
 import com.example.shopper.distribucionapp.Dao.DespachoEstadoDao;
 import com.example.shopper.distribucionapp.Dao.ListaHojaDespachoDao;
+import com.example.shopper.distribucionapp.Dao.MapsActivity;
 import com.example.shopper.distribucionapp.Entity.DespachoEstadoEntity;
 import com.example.shopper.distribucionapp.Entity.LoginEntity;
 import com.example.shopper.distribucionapp.Entity.ListaHojaDespachoEntity;
@@ -53,6 +58,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
     static List<ListaHojaDespachoEntity> EDespachos;
     LoginEntity dSesion = new LoginEntity();
     Button btnconsultarlistahojadespacho,btnfechadespacho;
+    ImageButton ibtnconsultamapa,ibtnguardaestado;
     public String fechadespacho;
     ProgressDialog pd;
     private static final int TIPO_DIALOGO3=0;
@@ -74,7 +80,8 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
     {
         super.onCreate(savedInstanceState);
         Login =  new LoginView();
-
+        ibtnconsultamapa = (ImageButton) findViewById(R.id.btnconsultamapacliente);
+        ibtnguardaestado = (ImageButton) findViewById(R.id.btnactualizaestadodespacho);
         gpsController = new GPSController(getApplicationContext());
         mLocation = gpsController.getLocation();
         latitude = mLocation.getLatitude();
@@ -91,17 +98,25 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
         resultado = (TextView)findViewById(R.id.txtresultado);
         // Listener de los botones
         btnconsultarlistahojadespacho.setOnClickListener(this);
+
         btnfechadespacho.setOnClickListener(this);
         lista = (ListView) findViewById(android.R.id.list);
 
         EfficientAdapter adapter = new EfficientAdapter(this,EDespachos);
         lista.setAdapter(adapter);
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
+
+       // ibtnconsultamapa.setAdapter(adapter);
+
+        lista.
+
+                setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
+                int i = 0;
+                i=position;
                 android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialog();
                 dialogFragment.show(getSupportFragmentManager(),"un dialogo");
                 for(int j=0;j<EDespachos.size();j++)
@@ -157,7 +172,13 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
                                     "Toast por defecto"+etfechadespacho, Toast.LENGTH_SHORT);
 
                     toast2.show();
-            }
+                }
+                break;
+            case R.id.btnconsultamapacliente:
+
+                Intent i= new Intent(getApplicationContext(),   MapsActivity.class);
+                startActivity(i);
+
             break;
             default:
                 break;
@@ -216,7 +237,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
 
 
-    public static class EfficientAdapter extends ArrayAdapter<ListaHojaDespachoEntity> {
+    public class EfficientAdapter extends ArrayAdapter<ListaHojaDespachoEntity> {
 
         public Activity context;
         public List<ListaHojaDespachoEntity> detalles;
@@ -228,11 +249,13 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             this.detalles = valores;
         }
 
-        static class ViewHolder {
+         class ViewHolder {
             TextView lblcodigo;
             TextView lbldesc;
             TextView lblcant;
             TextView lblume;
+            ImageButton ibntconsultamapa;
+             ImageButton ibtnactualizaestadodespacho;
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -249,6 +272,38 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
                 viewHolder.lbldesc = (TextView) view.findViewById(R.id.lbldesc);
                 viewHolder.lblcant = (TextView) view.findViewById(R.id.lblcant);
                 viewHolder.lblume = (TextView) view.findViewById(R.id.lblume);
+                viewHolder.ibntconsultamapa = (ImageButton) view.findViewById(R.id.btnconsultamapacliente);
+                //
+                //viewHolder.ibntconsultamapa.
+                viewHolder.ibntconsultamapa.setOnClickListener( new View.OnClickListener()
+                {
+
+                    @Override
+                    public void onClick(View view) {
+                        Intent i= new Intent(getContext(),   MapsActivity.class);
+                        startActivity(i);
+                    }
+                });
+
+                viewHolder.ibtnactualizaestadodespacho = (ImageButton) view.findViewById(R.id.btnactualizaestadodespacho);
+                viewHolder.ibtnactualizaestadodespacho.setOnClickListener( new View.OnClickListener()
+                {
+
+                    @Override
+                    public void onClick(View view) {
+                        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialog();
+                        dialogFragment.show(getSupportFragmentManager(),"un dialogo");
+                        for(int j=0;j<EDespachos.size();j++)
+                        {
+                            final int position = lista.getPositionForView((View) view.getParent());
+                            if(position==j)
+                            {
+                                Destado.OrderDispatch=EDespachos.get(j).OrderDispatch;
+                            }
+
+                        }
+                    }
+                });
 
                 view.setTag(viewHolder);
                 viewHolder.lblcodigo.setTag(this.detalles.get(position));

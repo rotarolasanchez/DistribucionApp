@@ -16,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDAqwKC06eCZpcEasgP8DrRKU9kiUhR88s" />
         <activity
             android:name=".View.LoginView"
             android:configChanges="screenSize|orientation"
@@ -80,7 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".View.MenuDialog"
+            android:name=".View.MenuDialogView"
             android:label="Map">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

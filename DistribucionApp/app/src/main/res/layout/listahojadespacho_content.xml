@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -32,6 +34,23 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/lblume"
                 android:layout_marginLeft="1dp" />
+
+            <ImageButton
+                android:id="@+id/btnactualizaestadodespacho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageButton"
+                android:layout_toEndOf="@+id/imageButton"
+                android:layout_toRightOf="@+id/imageButton"
+                app:srcCompat="@mipmap/movil_consultas" />
+            <ImageButton
+                android:id="@+id/btnconsultamapacliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scrollView9"
+                android:layout_toEndOf="@+id/scrollView9"
+                android:layout_toRightOf="@+id/scrollView9"
+                app:srcCompat="@mipmap/vehiculo_cm" />
         </TableRow>
 
     </TableLayout>

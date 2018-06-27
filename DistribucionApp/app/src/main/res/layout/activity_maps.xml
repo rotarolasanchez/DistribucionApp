@@ -49,12 +49,13 @@
             android:layout_height="40dp"
             android:padding="5dp"
             android:src="@drawable/ic_clock"/>
+
         <TextView
-            android:layout_marginLeft="5dp"
+            android:id="@+id/tvDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 min"
-            android:id="@+id/tvDuration" />
+            android:layout_marginLeft="5dp"
+            android:text="0 min" />
     </LinearLayout>
 
 

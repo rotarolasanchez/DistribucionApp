@@ -143,7 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,10000,10,gpsTracker);
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,0,gpsTracker);
-        //mMap.setMyLocationEnabled(true);*/
+        ///mMap.setMyLocationEnabled(true);
     }
     private void actualizaUbicacion(Location location) {
         if (location != null) {
