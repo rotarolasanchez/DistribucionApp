@@ -7,6 +7,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ListaHojaDespachoDao {
     {
         Despachos = new ArrayList<ListaHojaDespachoEntity>();
         Despachos.clear();
-        SoapObject rpc = new SoapObject("http://190.12.79.136/", "ObtenerDespacho");
+        SoapObject rpc = new SoapObject("http://190.12.79.136/", "ReprocesarDespachoOrdenado");
         rpc.addProperty("company", "c001");
         rpc.addProperty("vend", vend);
         rpc.addProperty("fprog", fprog);
@@ -33,9 +34,9 @@ public class ListaHojaDespachoDao {
         try
         {
                 String conexion = "http://190.12.79.136/WebServiceDistribucionApp/WebServiceDistribucionApp.asmx";
-                androidHttpTransport = new HttpTransportSE(conexion);
+                androidHttpTransport = new HttpTransportSE(conexion,1800000);
                 androidHttpTransport.debug = true;
-                androidHttpTransport.call("http://190.12.79.136/ObtenerDespacho",
+                androidHttpTransport.call("http://190.12.79.136/ReprocesarDespachoOrdenado",
                         envelope);
                 // Respuesta del servicio web
                 SoapObject result = (SoapObject) envelope.getResponse();
@@ -79,6 +80,57 @@ public class ListaHojaDespachoDao {
 
         }
         return Despachos;
+    }
+
+    public  String  EliminarDespachos
+            (
+                    String vend,
+                    String fprog
+            )
+    {
+        String resultado="";
+        SoapObject rpc = new SoapObject("http://190.12.79.136/", "EliminarDespachoOrdenado");
+        rpc.addProperty("company","C001");
+        rpc.addProperty("vend", vend);
+        rpc.addProperty("fprog", fprog);
+
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.bodyOut = rpc;
+        envelope.dotNet = true;
+        envelope.encodingStyle = SoapSerializationEnvelope.XSD;
+        HttpTransportSE androidHttpTransport = null;
+
+        /*private final HttpTransportSE getHttpTransportSE() {
+        HttpTransportSE androidHttpTransport = new HttpTransportSE(Proxy.NO_PROXY,MAIN_REQUEST_URL,60000);
+        androidHttpTransport.debug = true;
+        ht.setXmlVersionTag("<!--?xml version=\"1.0\" encoding= \"UTF-8\" ?-->");
+        return ht;
+         }*/
+        try
+        {
+            String conexion = "http://190.12.79.136/WebServiceDistribucionApp/WebServiceDistribucionApp.asmx";
+            androidHttpTransport = new HttpTransportSE(conexion,60000);
+            androidHttpTransport.debug = true;
+            androidHttpTransport.call("http://190.12.79.136/EliminarDespachoOrdenado",
+                    envelope);
+            // Respuesta del servicio web
+            // Respuesta del servicio web
+            resultado =  envelope.getResponse().toString();
+            /*SoapObject result = (SoapObject) envelope.getResponse();
+            int totalCount = result.getPropertyCount();
+            if(totalCount>0)
+            {
+                resultado=1;
+            }*/
+
+        }
+        catch (Exception e)
+        {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+
+        }
+        return resultado;
     }
 
 }

@@ -16,33 +16,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".Controller.ServiceGPSController"
+        ></service>
+        <service android:name=".Controller.GPSController"
+            ></service>
+
+
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDAqwKC06eCZpcEasgP8DrRKU9kiUhR88s" />
         <activity
             android:name=".View.LoginView"
             android:configChanges="screenSize|orientation"
-            android:label="Login">
+            android:label="DistribucioApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
         <activity
             android:name=".View.MenuView"
             android:configChanges="screenSize|orientation"
-            android:label="Login">
+            android:label="DistribucioApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
         </activity>
         <activity
             android:name=".View.DespachoEstadoView"
             android:configChanges="screenSize|orientation"
-            android:label="Despacho Estado">
+            android:label="DistribucioApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,47 +59,44 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".View.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <service android:name=".GeofenceTransitionService" />
+
+            <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+        </activity>
         <activity
         android:name=".View.ListaHojaDespachoView"
         android:configChanges="screenSize|orientation"
-        android:label="Lista Hoja de Despacho">
+        android:label="DistribucioApp">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
+            <activity
+                android:name=".Dao.DespachoEstadoDao"
+                android:configChanges="screenSize|orientation"
+                android:label="DistribucioApp">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+
+            </activity>
+
 
     </activity>
-        <activity
-            android:name=".Dao.DespachoEstadoDao"
-            android:configChanges="screenSize|orientation"
-            android:label="Lista Hoja de Despacho">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
 
-        </activity>
-
-        <activity
-            android:name=".Dao.MapsActivity"
-            android:label="Map">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".View.MenuDialogView"
-            android:label="Map">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

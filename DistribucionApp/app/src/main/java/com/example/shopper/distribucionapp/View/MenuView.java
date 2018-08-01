@@ -1,32 +1,32 @@
 package com.example.shopper.distribucionapp.View;
 
+import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.example.shopper.distribucionapp.Controller.DespachoEstadoDialog;
+import com.example.shopper.distribucionapp.Controller.Constants;
 import com.example.shopper.distribucionapp.Controller.GPSController;
-import com.example.shopper.distribucionapp.Dao.MapsActivity;
+import com.example.shopper.distribucionapp.Controller.ServiceGPSController;
 import com.example.shopper.distribucionapp.R;
-import com.example.shopper.distribucionapp.View.ListaHojaDespachoView;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
+import java.util.ServiceConfigurationError;
 
 /**
  * Created by icruz on 27/05/2016.
  */
 public class MenuView extends AppCompatActivity {
     private ImageButton ibtn9;
+    ServiceGPSController serviceGPSController = new ServiceGPSController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +38,92 @@ public class MenuView extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i= new Intent(getApplicationContext(), ListaHojaDespachoView.class);
                 startActivity(i);
+
+                startService(new Intent(getBaseContext(),ServiceGPSController.class));
+                //Intent intentGPSService = new Intent(getApplicationContext(), ServiceGPSController.class);
+                //startService(intentGPSService); //Iniciar servicio
+
+
+
             }
         });
 
-    }
+        // Filtro de acciones que serán alertadas
+        IntentFilter filter = new IntentFilter(
+                Constants.ACTION_RUN_ISERVICE);
+        filter.addAction(Constants.ACTION_RUN_SERVICE);
+        filter.addAction(Constants.ACTION_MEMORY_EXIT);
+        filter.addAction(Constants.ACTION_PROGRESS_EXIT);
 
-    public void IniciaMapa()
-    {
-    Intent i= new Intent(getApplicationContext(), MapsActivity.class);
-    startActivity(i);
+        // Crear un nuevo ResponseReceiver
+        ResponseReceiver receiver =
+                new ResponseReceiver();
+        // Registrar el receiver y su filtro
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                receiver,
+                filter);
+
     }
 
     public void ActualizaDespacho()
     {
-        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialog();
+        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogView();
         dialogFragment.show(getSupportFragmentManager(),"un dialogo");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate( R.menu.menu_main, menu );
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch ( item.getItemId() ) {
+            case R.id.salir: {
+                CerrarSesion();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void CerrarSesion()
+    {
+        Intent intentMemoryService = new Intent(
+                getApplicationContext(), ServiceGPSController.class);
+        stopService(intentMemoryService); // Detener servicio
+        System.exit(0);
+
+
+
+    }
+
+    private class ResponseReceiver extends BroadcastReceiver {
+
+        // Sin instancias
+        private ResponseReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+           /* switch (intent.getAction()) {
+                case Constants.ACTION_RUN_SERVICE:
+                    memoryUsageText.setText(intent.getStringExtra(Constants.EXTRA_MEMORY));
+                    break;
+
+                case Constants.ACTION_RUN_ISERVICE:
+                    progressText.setText(intent.getIntExtra(Constants.EXTRA_PROGRESS, -1) + "");
+                    break;
+
+                case Constants.ACTION_MEMORY_EXIT:
+                    memoryUsageText.setText("Memoria");
+                    break;
+
+                case Constants.ACTION_PROGRESS_EXIT:
+                    progressText.setText("Progreso");
+                    break;
+            }*/
+        }
     }
 }

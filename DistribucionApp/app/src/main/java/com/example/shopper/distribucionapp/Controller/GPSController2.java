@@ -1,6 +1,7 @@
 package com.example.shopper.distribucionapp.Controller;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +12,20 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.shopper.distribucionapp.Dao.TrackingDao;
 import com.example.shopper.distribucionapp.View.TrackingView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.content.ContentValues.TAG;
 
@@ -22,7 +33,7 @@ import static android.content.ContentValues.TAG;
  * Created by Shopper on 24/03/2018.
  */
 
-public class GPSController extends Service implements LocationListener {
+public class GPSController2 extends Service implements LocationListener {
 
     private final Context context;
     boolean isGPSEnabled =false;
@@ -33,14 +44,30 @@ public class GPSController extends Service implements LocationListener {
     public Location location;
     protected LocationManager locationManager;
 
-    public GPSController(Context context){
+    @Override
+    public void onCreate() {
+
+        Log.d(TAG, "Servicio creado...");
+        //googleApiClient =  new GoogleApiCliente();
+
+
+        //location = gpsController.getLocation(location);
+        //trackingView =  new TrackingView();
+        //trackingDao= new TrackingDao();
+        //latitude = location.getLatitude();
+        //longitude = location.getLongitude();
+
+
+
+    }
+
+
+    public GPSController2(Context context){
         this.context=context;
     }
 
     //Create a GetLocation Method //
-    public  Location getLocation(){
-        //location.reset();
-        //MapsActivity mapsActivity = new MapsActivity();
+    public Location getLocation(Location location){
         try{
 
             //if(getLocation()!=null)
@@ -49,6 +76,7 @@ public class GPSController extends Service implements LocationListener {
             //}
 
             //location.reset();
+            location=null;
             locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
             isGPSEnabled = locationManager.isProviderEnabled(locationManager.GPS_PROVIDER);
             isNetworkEnabled=locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER);
@@ -58,6 +86,7 @@ public class GPSController extends Service implements LocationListener {
 
                 if(isGPSEnabled){
                     if(location==null){
+
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
 
                         if(locationManager!=null){
@@ -70,7 +99,7 @@ public class GPSController extends Service implements LocationListener {
                if(location==null){
                     if(isNetworkEnabled){
 
-                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,0,this);
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,this);
                         if(locationManager!=null){
                             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                             //mapsActivity.tv2.setText("Buscando Coordenada de Red");
@@ -81,14 +110,11 @@ public class GPSController extends Service implements LocationListener {
 
             }
 
-        }catch(Exception ex){
+        }catch(Exception ex) {
             ex.printStackTrace();
             //Toast.makeText(getApplicationContext(), "GPS encontradp!!", Toast.LENGTH_SHORT).show();
-
-
+            //mapsActivity.tv2.setText("RED ENCONTRADA");
         }
-
-        //mapsActivity.tv2.setText("RED ENCONTRADA");
         return  location;
 
     }
@@ -96,6 +122,7 @@ public class GPSController extends Service implements LocationListener {
     // followings are the default method if we imlement LocationListener //
     @Override
     public void onLocationChanged(Location location){
+        getLocation(location);
 
     }
     @Override
@@ -114,6 +141,15 @@ public class GPSController extends Service implements LocationListener {
     public IBinder onBind(Intent arg0){
         return null;
     }
+    @Override
+    public void onDestroy() {
+    }
 
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        return START_NOT_STICKY;
+    }
 
 }

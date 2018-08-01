@@ -6,14 +6,14 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,19 +27,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopper.distribucionapp.Controller.GPSController;
-import com.example.shopper.distribucionapp.Controller.DespachoEstadoDialog;
-import com.example.shopper.distribucionapp.Controller.MenuDialogController;
+import com.example.shopper.distribucionapp.Controller.GPSController2;
+import com.example.shopper.distribucionapp.Controller.ServiceGPSController;
 import com.example.shopper.distribucionapp.Dao.DespachoEstadoDao;
 import com.example.shopper.distribucionapp.Dao.ListaHojaDespachoDao;
-import com.example.shopper.distribucionapp.Dao.MapsActivity;
+import com.example.shopper.distribucionapp.Dao.TrackingDao;
 import com.example.shopper.distribucionapp.Entity.DespachoEstadoEntity;
+import com.example.shopper.distribucionapp.Entity.ListaDespachoEntity;
 import com.example.shopper.distribucionapp.Entity.LoginEntity;
 import com.example.shopper.distribucionapp.Entity.ListaHojaDespachoEntity;
 import com.example.shopper.distribucionapp.R;
 
-import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -64,14 +69,18 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
     private static final int TIPO_DIALOGO3=0;
     private  int diadespacho,mesdespacho,anodespacho,hora,minutos;
     private static DatePickerDialog.OnDateSetListener oyenteSelectorFecha3;
+    public ListaDespachoEntity listaDespachoEntity;
 
     public EditText etfechadespacho;
     TextView resultado;
     public static EfficientAdapter adap;
 
-    private GPSController gpsController;
-    private Location mLocation;
+    private GPSController2 gpsController;
+
+    //private Location mLocation;
     double latitude=0, longitude=0;
+    private Location location;
+    TrackingDao trackingDao;
 
 
 
@@ -82,10 +91,12 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
         Login =  new LoginView();
         ibtnconsultamapa = (ImageButton) findViewById(R.id.btnconsultamapacliente);
         ibtnguardaestado = (ImageButton) findViewById(R.id.btnactualizaestadodespacho);
-        gpsController = new GPSController(getApplicationContext());
-        mLocation = gpsController.getLocation();
-        latitude = mLocation.getLatitude();
-        longitude = mLocation.getLongitude();
+        listaDespachoEntity = new ListaDespachoEntity();
+
+        //gpsController = new GPSController2(getApplicationContext());
+        //location = gpsController.getLocation(location);
+        //latitude = location.getLatitude();
+        //longitude = location.getLongitude();
         context = this;
         DDespachos = new DespachoEstadoDao();
         EDespachos = new ArrayList<ListaHojaDespachoEntity>();
@@ -117,7 +128,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                 int i = 0;
                 i=position;
-                android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialog();
+                android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogView();
                 dialogFragment.show(getSupportFragmentManager(),"un dialogo");
                 for(int j=0;j<EDespachos.size();j++)
                 {
@@ -174,12 +185,6 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
                     toast2.show();
                 }
                 break;
-            case R.id.btnconsultamapacliente:
-
-                Intent i= new Intent(getApplicationContext(),   MapsActivity.class);
-                startActivity(i);
-
-            break;
             default:
                 break;
         }
@@ -237,23 +242,27 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
 
 
-    public class EfficientAdapter extends ArrayAdapter<ListaHojaDespachoEntity> {
+    public class EfficientAdapter extends ArrayAdapter<ListaHojaDespachoEntity>
+    {
 
         public Activity context;
         public List<ListaHojaDespachoEntity> detalles;
 
-        public EfficientAdapter(Activity context, List<ListaHojaDespachoEntity> valores) {
+        public EfficientAdapter(Activity context, List<ListaHojaDespachoEntity> valores)
+        {
             // Cache the LayoutInflate to avoid asking for a new one each time.
             super(context, R.layout.listahojadespacho_content, valores);
             this.context = context;
             this.detalles = valores;
         }
 
-         class ViewHolder {
+         class ViewHolder
+         {
             TextView lblcodigo;
             TextView lbldesc;
             TextView lblcant;
             TextView lblume;
+             TextView lblcoordenada;
             ImageButton ibntconsultamapa;
              ImageButton ibtnactualizaestadodespacho;
         }
@@ -272,6 +281,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
                 viewHolder.lbldesc = (TextView) view.findViewById(R.id.lbldesc);
                 viewHolder.lblcant = (TextView) view.findViewById(R.id.lblcant);
                 viewHolder.lblume = (TextView) view.findViewById(R.id.lblume);
+                viewHolder.lblcoordenada = (TextView) view.findViewById(R.id.lblcoordenada);
                 viewHolder.ibntconsultamapa = (ImageButton) view.findViewById(R.id.btnconsultamapacliente);
                 //
                 //viewHolder.ibntconsultamapa.
@@ -280,8 +290,29 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                     @Override
                     public void onClick(View view) {
-                        Intent i= new Intent(getContext(),   MapsActivity.class);
+                        Intent i= new Intent(getContext(),   MainActivity.class);
                         startActivity(i);
+                        final int position = lista.getPositionForView((View) view.getParent());
+                        final ListaHojaDespachoEntity clienteNew = detalles.get(position);
+                        listaDespachoEntity.company=clienteNew.Company;
+                        listaDespachoEntity.salesrepcode=clienteNew.Salesrepcode;
+                        listaDespachoEntity.latitud=clienteNew.Latitude_c;
+                        listaDespachoEntity.longitud=clienteNew.Longitude_c;
+
+
+
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                            listaDespachoEntity.fecha= format.parse((clienteNew.FechaDespacho));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        listaDespachoEntity.custid=clienteNew.Custid;
+                        listaDespachoEntity.custnum=clienteNew.Custnum;
+                        listaDespachoEntity.shiptonum=clienteNew.Shiptonum;
+
+
+
                     }
                 });
 
@@ -291,7 +322,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                     @Override
                     public void onClick(View view) {
-                        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialog();
+                        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogView();
                         dialogFragment.show(getSupportFragmentManager(),"un dialogo");
                         for(int j=0;j<EDespachos.size();j++)
                         {
@@ -319,6 +350,9 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             holder.lbldesc.setText(clienteNew.Name+ "");
             holder.lblcant.setText(clienteNew.LegalNumber + "");
             holder.lblume.setText(clienteNew.State + "");
+            //String resultado=Funcion(clienteNew.Latitude_c);
+            holder.lblcoordenada.setText(
+                    Funcion(clienteNew.Latitude_c) + "");
 
             //view.setTag(EDespachos.get(position).getShiptonum());
 
@@ -328,10 +362,83 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             return view;
         }
 
+        public String Funcion(String clientenew)
+        {
+            String indicador="";
+            //if(!(clientenew.equals(1))||!(clientenew.equals(null))||clientenew!="anyType{}")
+            if(clientenew.equals("anyType{}"))
+            {
+                indicador="0";
+            }
+            else if(clientenew.equals(1))
+            {
+                indicador="0";
+            }
+            else
+                indicador="1";
+
+            return indicador;
+        }
 
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate( R.menu.main_menu, menu );
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.salir: {
+                CerrarSesion();
+                return true;
+            }
+            case R.id.reprocesar: {
+                String valor="";
+                valor=Reprocesar();
+                if(valor=="1")
+                {
+                    new ObtenerWebServiceListaDespacho().execute("");
+                    pd = ProgressDialog.show(this, "Por favor espere", "Consultando productos",true,false);
+                    //Toast.makeText(context, "Lista Reprocesada", Toast.LENGTH_SHORT).show();
+                }
 
+                return true;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void CerrarSesion()
+    {
+        Intent intentMemoryService = new Intent(
+                getApplicationContext(), ServiceGPSController.class);
+        stopService(intentMemoryService); // Detener servicio
+
+       System.exit(0);
+
+    }
+    public String Reprocesar()
+    {
+       String resultado="";
+
+
+
+        new Thread(new Runnable() {
+            public void run() {
+
+        ListaHojaDespachoDao cDespachos = new ListaHojaDespachoDao();
+                cDespachos.EliminarDespachos(dSesion.usuarioSesion, etfechadespacho.getText().toString());
+                //new ObtenerWebServiceListaDespacho().execute("");
+            }
+        }).start();
+    resultado="1";
+    return  resultado;
+
+
+    }
 
 }

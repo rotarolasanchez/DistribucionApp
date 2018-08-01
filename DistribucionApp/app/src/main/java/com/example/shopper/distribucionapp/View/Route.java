@@ -1,7 +1,5 @@
-package com.example.shopper.distribucionapp.Dao;
+package com.example.shopper.distribucionapp.View;
 
-import com.example.shopper.distribucionapp.Dao.Distance;
-import com.example.shopper.distribucionapp.Dao.Duration;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;

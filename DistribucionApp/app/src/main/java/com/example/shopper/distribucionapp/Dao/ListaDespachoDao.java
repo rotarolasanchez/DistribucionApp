@@ -13,44 +13,30 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 /**
- * Created by Shopper on 29/03/2018.
+ * Created by Shopper on 24/07/2018.
  */
 
-public class DespachoEstadoDao extends AppCompatActivity
+public class ListaDespachoDao extends AppCompatActivity
 {
-    private Context context;
-    TextView resultado,resultado2;
-    private GPSController gpsController;
-    private Location mLocation;
-    double latitude=0, longitude=0;
-
-
-    public  String  ActualizarDespacho
+    public  String  ActualizarLocalizacionCliente
             (
-            int entregado,
-            int reprogramado,
-            int anulado,
-            int pendiente,
-            String latitud,
-            String longitud,
-            String orderdispatch,
-            String vend,
-            String fprog,
-            String company
+                    String company,
+
+                    String latitud,
+                    String longitud,
+                    String shiptonum,
+                    String custnum
             )
     {
         String resultado="";
-        SoapObject rpc = new SoapObject("http://190.12.79.136/", "ActualizarDespachoOrdenado");
-        rpc.addProperty("entregado", entregado);
-        rpc.addProperty("reprogramado", reprogramado);
-        rpc.addProperty("anulado", anulado);
-        rpc.addProperty("pendiente", pendiente);
-        rpc.addProperty("latitude_c", latitud);
-        rpc.addProperty("longitude_c", longitud);
-        rpc.addProperty("orderdispatch", orderdispatch);
-        rpc.addProperty("vend", vend);
-        rpc.addProperty("fechadespacho", fprog);
-        rpc.addProperty("company", company);
+        SoapObject rpc = new SoapObject("http://190.12.79.136/", "ActualizarLocalizacionCliente");
+        rpc.addProperty("Company", company);
+        rpc.addProperty("Latitude_c", latitud);
+        rpc.addProperty("Longitude_c", longitud);
+        rpc.addProperty("ShiptoNum", shiptonum);
+        rpc.addProperty("CustNum", custnum);
+
+
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.bodyOut = rpc;
         envelope.dotNet = true;
@@ -61,7 +47,7 @@ public class DespachoEstadoDao extends AppCompatActivity
             String conexion = "http://190.12.79.136/WebServiceDistribucionApp/WebServiceDistribucionApp.asmx";
             androidHttpTransport = new HttpTransportSE(conexion);
             androidHttpTransport.debug = true;
-            androidHttpTransport.call("http://190.12.79.136/ActualizarDespachoOrdenado",
+            androidHttpTransport.call("http://190.12.79.136/ActualizarLocalizacionCliente",
                     envelope);
             // Respuesta del servicio web
             // Respuesta del servicio web
@@ -71,8 +57,8 @@ public class DespachoEstadoDao extends AppCompatActivity
             if(totalCount>0)
             {
                 resultado=1;
-            }
-            */
+            }*/
+
         }
         catch (Exception e)
         {
@@ -82,5 +68,4 @@ public class DespachoEstadoDao extends AppCompatActivity
         }
         return resultado;
     }
-
 }

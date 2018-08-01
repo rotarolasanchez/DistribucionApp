@@ -34,6 +34,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/lblume"
                 android:layout_marginLeft="1dp" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblcoordenada"
+                android:layout_marginLeft="1dp" />
 
             <ImageButton
                 android:id="@+id/btnactualizaestadodespacho"
@@ -42,7 +47,7 @@
                 android:layout_alignTop="@+id/imageButton"
                 android:layout_toEndOf="@+id/imageButton"
                 android:layout_toRightOf="@+id/imageButton"
-                app:srcCompat="@mipmap/movil_consultas" />
+                app:srcCompat="@mipmap/buscar" />
             <ImageButton
                 android:id="@+id/btnconsultamapacliente"
                 android:layout_width="wrap_content"
@@ -50,7 +55,7 @@
                 android:layout_below="@+id/scrollView9"
                 android:layout_toEndOf="@+id/scrollView9"
                 android:layout_toRightOf="@+id/scrollView9"
-                app:srcCompat="@mipmap/vehiculo_cm" />
+                app:srcCompat="@mipmap/buscar_direccion" />
         </TableRow>
 
     </TableLayout>

@@ -1,7 +1,6 @@
-package com.example.shopper.distribucionapp.Dao;
+package com.example.shopper.distribucionapp.View;
 
 import java.util.List;
-
 
 /**
  * Created by Mai Thanh Hiep on 4/3/2016.

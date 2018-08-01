@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shopper.distribucionapp.Controller.ServiceGPSController;
 import com.example.shopper.distribucionapp.Dao.ListaHojaDespachoDao;
 import com.example.shopper.distribucionapp.Dao.LoginDao;
 import com.example.shopper.distribucionapp.Entity.LoginEntity;
@@ -102,13 +103,16 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
             pd.dismiss();
             super.onPostExecute(result);
             if(result.toString().equals("1")){
+
                 dSesion.usuarioSesion = txtusu.getText().toString();
                 Toast.makeText(context, "Equipo autorizado", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getApplicationContext(),MenuView.class);
                 startActivity(intent);
+
+
                 finish();
             }else{
-                Toast.makeText(context, "Equipo no autorizado al MenuDialogView", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Equipo no autorizado", Toast.LENGTH_LONG).show();
             }
         }
 

@@ -121,8 +121,18 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Estado"
+                        android:text="Botones"
                         android:id="@+id/lblstatus"
+                        style="@android:style/TextAppearance.Widget.TextView"
+                        android:background="@color/accent_material_dark"
+                        android:layout_weight="0.5"
+                        android:layout_marginLeft="1dp"
+                        android:textAlignment="center" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Coordenada"
+                        android:id="@+id/lblcoordenada"
                         style="@android:style/TextAppearance.Widget.TextView"
                         android:background="@color/accent_material_dark"
                         android:layout_weight="0.5"
