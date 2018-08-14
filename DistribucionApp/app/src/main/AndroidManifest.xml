@@ -81,6 +81,16 @@
 
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
+        </activity>
+        <activity
+            android:name=".View.IndicatorView"
+            android:configChanges="screenSize|orientation"
+            android:label="DistribucioApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <activity
                 android:name=".Dao.DespachoEstadoDao"
                 android:configChanges="screenSize|orientation"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/Consultar" android:title="Consultar" app:showAsAction="never" />
+    <item android:id="@+id/salir" android:title="Cerrar Sesion" app:showAsAction="never" />
+    <item android:id="@+id/Buscar" android:title="@string/Buscar" android:icon="@mipmap/buscar2" android:orderInCategory="100"
+        app:showAsAction="ifRoom|collapseActionView" app:actionViewClass="android.support.v7.widget.SearchView"></item>
+
+</menu>

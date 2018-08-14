@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +60,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.security.AccessController.getContext;
+
 public class MainActivity extends AppCompatActivity
         implements
         GoogleApiClient.ConnectionCallbacks,
@@ -85,6 +88,7 @@ public class MainActivity extends AppCompatActivity
     private Button btnFindPath;
     private MapFragment mapFragment;
 
+
     private static final String NOTIFICATION_MSG = "NOTIFICATION MSG";
     private EditText etOrigin;
     private EditText etDestination;
@@ -104,6 +108,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
         //textLat = (TextView) findViewById(R.id.lat);
         //textLong = (TextView) findViewById(R.id.lon);
         btnFindPath = (Button) findViewById(R.id.btnFindPath);
@@ -163,7 +168,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.localizacion: {
                 GuardarGeolocalizacion();
                 ///startGeofence();
-                Toast.makeText(context, "Equipo no autorizado", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Cliente Actualizado", Toast.LENGTH_SHORT).show();
                 return true;
             }
             case R.id.salir:{
@@ -234,7 +239,7 @@ public class MainActivity extends AppCompatActivity
         map = googleMap;
         map.setOnMapClickListener(this);
         map.setOnMarkerClickListener(this);
-       // map.setTrafficEnabled(true);
+        map.setTrafficEnabled(true);
     }
 
     @Override
@@ -590,8 +595,10 @@ public class MainActivity extends AppCompatActivity
 
     private void sendRequest()
     {
-        Double latitud=geoFenceMarker.getPosition().latitude;
-        Double longitud=geoFenceMarker.getPosition().longitude;
+        Double latitud=lastLocation.getLatitude();
+                //geoFenceMarker.getPosition().latitude;
+        Double longitud=lastLocation.getLongitude();
+                //geoFenceMarker.getPosition().longitude;
         String Deslatitud="";
         String Deslongitud="";
         String origin = latitud+","+longitud;

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -70,7 +72,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
     private  int diadespacho,mesdespacho,anodespacho,hora,minutos;
     private static DatePickerDialog.OnDateSetListener oyenteSelectorFecha3;
     public ListaDespachoEntity listaDespachoEntity;
-
+    CheckBox Chkbox;
     public EditText etfechadespacho;
     TextView resultado;
     public static EfficientAdapter adap;
@@ -92,7 +94,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
         ibtnconsultamapa = (ImageButton) findViewById(R.id.btnconsultamapacliente);
         ibtnguardaestado = (ImageButton) findViewById(R.id.btnactualizaestadodespacho);
         listaDespachoEntity = new ListaDespachoEntity();
-
+        Chkbox=(CheckBox)findViewById(R.id.chkbox1) ;
         //gpsController = new GPSController2(getApplicationContext());
         //location = gpsController.getLocation(location);
         //latitude = location.getLatitude();
@@ -258,11 +260,13 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
          class ViewHolder
          {
+             TextView lblordendespacho;
             TextView lblcodigo;
             TextView lbldesc;
             TextView lblcant;
             TextView lblume;
              TextView lblcoordenada;
+             CheckBox chkbox;
             ImageButton ibntconsultamapa;
              ImageButton ibtnactualizaestadodespacho;
         }
@@ -283,6 +287,8 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
                 viewHolder.lblume = (TextView) view.findViewById(R.id.lblume);
                 viewHolder.lblcoordenada = (TextView) view.findViewById(R.id.lblcoordenada);
                 viewHolder.ibntconsultamapa = (ImageButton) view.findViewById(R.id.btnconsultamapacliente);
+                viewHolder.chkbox=(CheckBox) view.findViewById(R.id.chkbox);
+                viewHolder.lblordendespacho = (TextView) view.findViewById(R.id.lblordendespacho);
                 //
                 //viewHolder.ibntconsultamapa.
                 viewHolder.ibntconsultamapa.setOnClickListener( new View.OnClickListener()
@@ -346,14 +352,26 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             final ViewHolder holder = (ViewHolder) view.getTag();
             final ListaHojaDespachoEntity clienteNew = detalles.get(position);
 
+            holder.lblordendespacho.setText("     "+ clienteNew.OrderDispatch + "");
             holder.lblcodigo.setText(clienteNew.Custid +"");
             holder.lbldesc.setText(clienteNew.Name+ "");
             holder.lblcant.setText(clienteNew.LegalNumber + "");
             holder.lblume.setText(clienteNew.State + "");
             //String resultado=Funcion(clienteNew.Latitude_c);
-            holder.lblcoordenada.setText(
-                    Funcion(clienteNew.Latitude_c) + "");
 
+            //holder.lblcoordenada.setText(
+                  //  Funcion(clienteNew.Latitude_c) + "");
+            //Boolean.valueOf()
+            holder.chkbox.setChecked(Funcion(clienteNew.Latitude_c));
+            if (clienteNew.State.equals("Entregado"))
+            {
+                view.setBackgroundColor(Color.GREEN);
+            } else {
+                view.setBackgroundColor(Color.RED);
+            }
+                    //Boolean.valueOf(Funcion(clienteNew.Latitude_c)));
+
+//                    setText(Boolean.valueOf(Funcion(clienteNew.Latitude_c))+ "");
             //view.setTag(EDespachos.get(position).getShiptonum());
 
 
@@ -362,20 +380,20 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             return view;
         }
 
-        public String Funcion(String clientenew)
+        public Boolean Funcion(String clientenew)
         {
-            String indicador="";
+            Boolean indicador=false;
             //if(!(clientenew.equals(1))||!(clientenew.equals(null))||clientenew!="anyType{}")
             if(clientenew.equals("anyType{}"))
             {
-                indicador="0";
+                indicador=false;
             }
             else if(clientenew.equals(1))
             {
-                indicador="0";
+                indicador=false;
             }
             else
-                indicador="1";
+                indicador=true;
 
             return indicador;
         }
@@ -440,5 +458,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
 
     }
+
+
 
 }

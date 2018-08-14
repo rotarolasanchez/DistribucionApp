@@ -25,8 +25,9 @@ import java.util.ServiceConfigurationError;
  * Created by icruz on 27/05/2016.
  */
 public class MenuView extends AppCompatActivity {
-    private ImageButton ibtn9;
+    private ImageButton ibtn9,ibtn;
     ServiceGPSController serviceGPSController = new ServiceGPSController();
+    IndicatorView indicatorView = new IndicatorView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +37,33 @@ public class MenuView extends AppCompatActivity {
         ibtn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(getApplicationContext(), ListaHojaDespachoView.class);
+                Intent i = new Intent(getApplicationContext(), ListaHojaDespachoView.class);
                 startActivity(i);
 
-                startService(new Intent(getBaseContext(),ServiceGPSController.class));
+                startService(new Intent(getBaseContext(), ServiceGPSController.class));
+                //Intent intentGPSService = new Intent(getApplicationContext(), ServiceGPSController.class);
+                //startService(intentGPSService); //Iniciar servicio
+
+
+            }});
+        ibtn = (ImageButton) findViewById(R.id.ibtn);
+        ibtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent j= new Intent(getApplicationContext(), IndicatorView.class);
+                startActivity(j);
+
+                //startService(new Intent(getBaseContext(),ServiceGPSController.class));
                 //Intent intentGPSService = new Intent(getApplicationContext(), ServiceGPSController.class);
                 //startService(intentGPSService); //Iniciar servicio
 
 
 
             }
+
+
+
+
         });
 
         // Filtro de acciones que serán alertadas

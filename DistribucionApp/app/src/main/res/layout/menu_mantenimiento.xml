@@ -46,6 +46,34 @@
                     android:textAlignment="center"
                     android:textAppearance="@android:style/TextAppearance" />
             </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/ibtn"
+                    android:layout_width="0dp"
+                    android:layout_column="1"
+                    android:layout_weight="4"
+                    android:src="@mipmap/indicador" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="4"
+                    android:text="Indicador"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance" />
+            </TableRow>
         </TableLayout>
     </ScrollView>
 

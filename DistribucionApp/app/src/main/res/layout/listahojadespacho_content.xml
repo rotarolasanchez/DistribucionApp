@@ -15,6 +15,11 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/lblordendespacho" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/lblcodigo" />
 
             <TextView
@@ -39,6 +44,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/lblcoordenada"
                 android:layout_marginLeft="1dp" />
+            <CheckBox
+                android:id="@+id/chkbox"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:enabled="false"
+                android:focusable="false"
+                />
 
             <ImageButton
                 android:id="@+id/btnactualizaestadodespacho"
