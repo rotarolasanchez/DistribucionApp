@@ -11,12 +11,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-
-import com.example.shopper.distribucionapp.Dao.TrackingDao;
-import com.example.shopper.distribucionapp.View.TrackingView;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Shopper on 24/03/2018.

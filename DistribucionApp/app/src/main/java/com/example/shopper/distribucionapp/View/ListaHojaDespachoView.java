@@ -28,7 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shopper.distribucionapp.Controller.GPSController;
+import com.example.shopper.distribucionapp.Controller.DespachoEstadoDialogController;
 import com.example.shopper.distribucionapp.Controller.GPSController2;
 import com.example.shopper.distribucionapp.Controller.ServiceGPSController;
 import com.example.shopper.distribucionapp.Dao.DespachoEstadoDao;
@@ -40,15 +40,11 @@ import com.example.shopper.distribucionapp.Entity.LoginEntity;
 import com.example.shopper.distribucionapp.Entity.ListaHojaDespachoEntity;
 import com.example.shopper.distribucionapp.R;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Shopper on 07/04/2018.*/
@@ -130,7 +126,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                 int i = 0;
                 i=position;
-                android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogView();
+                android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogController();
                 dialogFragment.show(getSupportFragmentManager(),"un dialogo");
                 for(int j=0;j<EDespachos.size();j++)
                 {
@@ -180,11 +176,11 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                         }};
                     showDialog(TIPO_DIALOGO3);
-                    Toast toast2 =
+                   /* Toast toast2 =
                             Toast.makeText(getApplicationContext(),
                                     "Toast por defecto"+etfechadespacho, Toast.LENGTH_SHORT);
 
-                    toast2.show();
+                    toast2.show();*/
                 }
                 break;
             default:
@@ -263,8 +259,8 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
              TextView lblordendespacho;
             TextView lblcodigo;
             TextView lbldesc;
-            TextView lblcant;
-            TextView lblume;
+            TextView lblfactura;
+            TextView lblestado;
              TextView lblcoordenada;
              CheckBox chkbox;
             ImageButton ibntconsultamapa;
@@ -283,9 +279,9 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
                 final ViewHolder viewHolder = new ViewHolder();
                 viewHolder.lblcodigo = (TextView) view.findViewById(R.id.lblcodigo);
                 viewHolder.lbldesc = (TextView) view.findViewById(R.id.lbldesc);
-                viewHolder.lblcant = (TextView) view.findViewById(R.id.lblcant);
-                viewHolder.lblume = (TextView) view.findViewById(R.id.lblume);
-                viewHolder.lblcoordenada = (TextView) view.findViewById(R.id.lblcoordenada);
+                viewHolder.lblfactura = (TextView) view.findViewById(R.id.lblfactura);
+                viewHolder.lblestado = (TextView) view.findViewById(R.id.lblestado);
+                //viewHolder.lblcoordenada = (TextView) view.findViewById(R.id.lblcoordenada);
                 viewHolder.ibntconsultamapa = (ImageButton) view.findViewById(R.id.btnconsultamapacliente);
                 viewHolder.chkbox=(CheckBox) view.findViewById(R.id.chkbox);
                 viewHolder.lblordendespacho = (TextView) view.findViewById(R.id.lblordendespacho);
@@ -296,7 +292,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                     @Override
                     public void onClick(View view) {
-                        Intent i= new Intent(getContext(),   MainActivity.class);
+                        Intent i= new Intent(getContext(),   MapaView.class);
                         startActivity(i);
                         final int position = lista.getPositionForView((View) view.getParent());
                         final ListaHojaDespachoEntity clienteNew = detalles.get(position);
@@ -328,7 +324,7 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
 
                     @Override
                     public void onClick(View view) {
-                        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogView();
+                        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogController();
                         dialogFragment.show(getSupportFragmentManager(),"un dialogo");
                         for(int j=0;j<EDespachos.size();j++)
                         {
@@ -355,8 +351,8 @@ public class ListaHojaDespachoView extends AppCompatActivity implements View.OnC
             holder.lblordendespacho.setText("     "+ clienteNew.OrderDispatch + "");
             holder.lblcodigo.setText(clienteNew.Custid +"");
             holder.lbldesc.setText(clienteNew.Name+ "");
-            holder.lblcant.setText(clienteNew.LegalNumber + "");
-            holder.lblume.setText(clienteNew.State + "");
+            holder.lblfactura.setText(clienteNew.LegalNumber + "");
+            holder.lblestado.setText(clienteNew.State + "");
             //String resultado=Funcion(clienteNew.Latitude_c);
 
             //holder.lblcoordenada.setText(

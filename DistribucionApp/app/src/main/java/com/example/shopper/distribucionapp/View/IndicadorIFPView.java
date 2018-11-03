@@ -5,9 +5,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.HideReturnsTransformationMethod;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.shopper.distribucionapp.Dao.IndicatorDao;
 import com.example.shopper.distribucionapp.Dao.ListaHojaDespachoDao;
@@ -43,17 +41,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by Shopper on 10/08/2018.
- */
-
-public class IndicatorView extends AppCompatActivity implements View.OnClickListener{
+public class IndicadorIFPView extends AppCompatActivity implements View.OnClickListener {
     private PieChart pieChart;
     private BarChart barChart;
-    private String [] months=new String []{"Entregado","Programado","Reprogramado","Anulado"};
-    private String [] Indices=new String []{"Total","Fuera de Plazo"};
+    private String [] months=new String []{"Entregado","Programado","Re-programado","Anulado"};
+    private String [] Indices=new String []{"Total","Re-programado"};
+    private String [] Indices2=new String []{"Porcentaje Fuera de Plazo","Porcentaje Despachos"};
     private int [] sale = new int []{25,20,38,10,15};
-    private int [] colors = new int []{Color.YELLOW,Color.RED,Color.GREEN,Color.BLUE,Color.LTGRAY};
+    private int [] sale2 = new int []{25,20};
+    private int [] colors = new int []{Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.LTGRAY};
     public String fechainicio,fechafin;
     ProgressDialog pd;
     private static final int TIPO_DIALOGO=0,TIPO_DIALOGO2=1;
@@ -64,12 +60,11 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
     IndicatorDao indicatorDao;
     LoginEntity dSesion = new LoginEntity();
     IndicatorEntity indicatorEntity;
-    static  List<IndicatorEntity> Eindicator;
+    static List<IndicatorEntity> Eindicator;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_indicador);
+        setContentView(R.layout.activity_indicador_ifpview);
         pieChart=(PieChart)findViewById(R.id.pieChart);
         barChart=(BarChart) findViewById(R.id.barChart);
         btnfechainicio = (Button)findViewById(R.id.btnfechainicio);
@@ -84,10 +79,10 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
         //createCharts();
         fechainicio="";
         fechafin="";
-
     }
 
-    private Chart getSameChart(Chart chart,String description,int textColor,int background, int animateY)
+
+    private Chart getSameChart(Chart chart, String description, int textColor, int background, int animateY)
     {
 
         chart.getDescription().setText(description);
@@ -118,11 +113,11 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
 
         ArrayList<LegendEntry>entries=new ArrayList<>();
-        for(int i=0;i<months.length;i++)
+        for(int i=0;i<Indices2.length;i++)
         {
             LegendEntry entry=new LegendEntry();
             entry.formColor=colors[i];
-            entry.label=months[i];
+            entry.label=Indices2[i];
             entries.add(entry);
         }
         legend.setCustom(entries);
@@ -175,9 +170,10 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
         int Valor=0;
         Double Prevalor=0.0;
         Prevalor=TotalGeneral;
+        //Prevalor=100.00;
         Valor=(int)Math.round(Prevalor);
         entries.add(new BarEntry(0,Valor));
-        TotalFueradePlazo=TotalAnulado+TotalProgramado+TotalReprogramado;
+        TotalFueradePlazo=TotalReprogramado;
         int Valor1=0;
         Double Prevalor1=0.0;
         Prevalor1=TotalFueradePlazo;
@@ -217,13 +213,14 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
         }
         int Valor=0;
         Double Prevalor=0.0;
-        Prevalor=TotalGeneral;
+        //Prevalor=TotalGeneral;
+        Prevalor=100.00;
         Valor=(int)Math.round(Prevalor);
         entries.add(new BarEntry(0,Valor));
         TotalFueradePlazo=TotalAnulado+TotalProgramado+TotalReprogramado;
         int Valor1=0;
         Double Prevalor1=0.0;
-        Prevalor1=TotalFueradePlazo;
+        Prevalor1=(TotalGeneral/TotalFueradePlazo)*100;
         Valor1=(int)Math.round(Prevalor1);
         entries.add(new BarEntry(1,Valor1));
         TotalIndice=TotalFueradePlazo/TotalGeneral;
@@ -233,29 +230,41 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
     }
     private ArrayList<PieEntry>getPieEntries()
     {
+
         Double TotalEntregado=0.0;
         Double TotalProgramado=0.0;
         Double TotalReprogramado=0.0;
         Double TotalAnulado=0.0;
         Double TotalGeneral=0.0;
+        int Valor1=0;
+        Double Prevalor1=0.0;
+        int Valor2=0;
+        Double Prevalor2=0.0;
         ArrayList<PieEntry> entries = new ArrayList<>();
         for(int i=0;i<Eindicator.size();i++)
         {
             TotalGeneral=TotalGeneral+Double.valueOf(Eindicator.get(i).Total);
 
         }
+
+        //Prevalor2=(TotalGeneral)*100;
+/*
         for(int i=0;i<Eindicator.size();i++)
         {
             TotalEntregado=TotalEntregado+Double.valueOf(Eindicator.get(i).Entregado);
 
         }
-        int Valor1=0;
-        Double Prevalor1=0.0;
-                Prevalor1=(TotalEntregado/TotalGeneral)*100;
+
+        Prevalor1=(TotalEntregado/TotalGeneral)*100;
         Valor1=(int)Math.round(Prevalor1);
         //Valor1=(TotalEntregado/TotalGeneral);
         entries.add(new PieEntry(Valor1));
-        for(int i=0;i<Eindicator.size();i++)
+        Prevalor2=100.00-Prevalor1;
+        Valor2=(int)Math.round(Prevalor2);
+        //Valor1=(TotalEntregado/TotalGeneral);
+        entries.add(new PieEntry(Valor2));
+        */
+/*        for(int i=0;i<Eindicator.size();i++)
         {
             TotalProgramado=TotalProgramado+Double.valueOf(Eindicator.get(i).Programado);
 
@@ -266,6 +275,7 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
         Valor2=(int)Math.round(Prevalor2);
         //Valor2=(TotalProgramado/TotalGeneral);
         entries.add(new PieEntry(Valor2));
+        */
         for(int i=0;i<Eindicator.size();i++)
         {
             TotalReprogramado=TotalReprogramado+Double.valueOf(Eindicator.get(i).Reprogramado);
@@ -277,26 +287,30 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
         Valor3=(int)(int)Math.round(Prevalor3);
         //Valor3=(TotalReprogramado/TotalGeneral);
         entries.add(new PieEntry(Valor3));
+        /*
         for(int i=0;i<Eindicator.size();i++)
         {
             TotalAnulado=TotalAnulado+Double.valueOf(Eindicator.get(i).Anulado);
 
         }
+        */
         int Valor4=0;
         Double Prevalor4=0.0;
-        Prevalor4=(TotalAnulado/TotalGeneral)*100;
+        //Prevalor4=(TotalAnulado/TotalGeneral)*100;
+        Prevalor4=100-Prevalor3;
         Valor4=(int)Math.round(Prevalor4);
         //Valor4=(TotalAnulado/TotalGeneral);
         entries.add(new PieEntry(Valor4));
+
         return entries;
     }
 
     private ArrayList<PieEntry>getPieEntries2()
     {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        for(int i=0;i<sale.length;i++)
+        for(int i=0;i<sale2.length;i++)
         {
-            entries.add(new PieEntry(sale[i]));
+            entries.add(new PieEntry(sale2[i]));
         }
         return entries;
     }
@@ -319,7 +333,9 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
 
     public void createCharts()
     {
-        barChart=(BarChart)getSameChart2(barChart,"Pedidos Fuera de Plazo: "+Indice(),Color.RED,Color.CYAN,3000);
+      barChart=(BarChart)getSameChart2(barChart,"Porcentaje Fuera de Plazo Requerido: 4% "
+                        //+(Indice())*100
+                ,Color.RED,Color.CYAN,3000);
         //barChart.setDescription("desc");
         barChart.setDrawGridBackground(true);
         barChart.setDrawBarShadow(true);
@@ -329,7 +345,7 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
         axisLeft(barChart.getAxisLeft());
         axisRight(barChart.getAxisRight());
 
-        pieChart=(PieChart)getSameChart(pieChart,"Nivel de Cumpliento de Despachos",Color.GRAY,Color.MAGENTA,3000);
+        pieChart=(PieChart)getSameChart(pieChart,"Porcentaje Fuera de Plazo Requerido: 4%",Color.GRAY,Color.MAGENTA,3000);
         pieChart.setHoleRadius(10);
         pieChart.setTransparentCircleRadius(12);
         pieChart.setData(getPieData());
@@ -337,8 +353,8 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
     }
 
     private DataSet getData(DataSet dataSet)
-        {
-            dataSet.setColors(colors);
+    {
+        dataSet.setColors(colors);
         dataSet.setValueTextSize(Color.WHITE);
         dataSet.setValueTextSize(10);
         return dataSet;
@@ -437,11 +453,11 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
 
                         }};
                     showDialog(TIPO_DIALOGO);
-                    Toast toast2 =
+                   /* Toast toast2 =
                             Toast.makeText(getApplicationContext(),
                                     "Toast por defecto"+etfechainicio, Toast.LENGTH_SHORT);
 
-                    toast2.show();
+                    toast2.show();*/
                 }
                 break;
             case R.id.btnfechafin:
@@ -470,11 +486,13 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
                             fechafin=etfechafin.getText().toString();
                         }};
                     showDialog(TIPO_DIALOGO2);
+                    /*
                     Toast toast2 =
                             Toast.makeText(getApplicationContext(),
                                     "Toast por defecto"+etfechafin, Toast.LENGTH_SHORT);
 
                     toast2.show();
+                    */
                 }
                 break;
             default:
@@ -545,7 +563,4 @@ public class IndicatorView extends AppCompatActivity implements View.OnClickList
             createCharts();
         }
     }
-
-
-
 }

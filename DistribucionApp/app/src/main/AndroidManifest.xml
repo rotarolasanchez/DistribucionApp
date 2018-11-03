@@ -16,25 +16,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".Controller.ServiceGPSController"
-        ></service>
-        <service android:name=".Controller.GPSController"
-            ></service>
-
-
-
+        <service android:name=".Controller.ServiceGPSController" />
+        <service android:name=".Controller.GPSController" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDAqwKC06eCZpcEasgP8DrRKU9kiUhR88s" />
+
         <activity
             android:name=".View.LoginView"
             android:configChanges="screenSize|orientation"
             android:label="DistribucioApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -45,7 +41,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
             </intent-filter>
         </activity>
         <activity
@@ -57,9 +52,8 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".View.MainActivity">
+        <activity android:name=".View.MapaView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,17 +67,7 @@
                 android:value="@integer/google_play_services_version" />
         </activity>
         <activity
-        android:name=".View.ListaHojaDespachoView"
-        android:configChanges="screenSize|orientation"
-        android:label="DistribucioApp">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-        </activity>
-        <activity
-            android:name=".View.IndicatorView"
+            android:name=".View.ListaHojaDespachoView"
             android:configChanges="screenSize|orientation"
             android:label="DistribucioApp">
             <intent-filter>
@@ -91,6 +75,17 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".View.IndicatorNCDView"
+            android:configChanges="screenSize|orientation"
+            android:label="DistribucioApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
             <activity
                 android:name=".Dao.DespachoEstadoDao"
                 android:configChanges="screenSize|orientation"
@@ -100,12 +95,26 @@
 
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
-
             </activity>
 
+        <activity android:name=".View.IndicadorIFPView"
+            android:configChanges="screenSize|orientation"
+            android:label="DistribucioApp">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-    </activity>
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".View.IndicatorMenuView"
+            android:configChanges="screenSize|orientation"
+            android:label="DistribucioApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 

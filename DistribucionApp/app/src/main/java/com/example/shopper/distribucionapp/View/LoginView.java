@@ -71,7 +71,7 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
                 Usuario = txtusu.getText().toString();
                 String cadenallamada = GET_BY_IMEI + "?cod_usuario=" + txtusu.getText().toString()+"&imei_usuario="+Imei;
                 hiloconexionLogin.execute(cadenallamada, "1");
-                Toast.makeText(context, "Paso por el case", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Paso por el case", Toast.LENGTH_LONG).show();
                 break;
             default:
 
@@ -120,7 +120,7 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
 
             TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             String imei = tm.getDeviceId();// Obtiene el imei tm.getDeviceId(); or
-            resultado2.setText(imei);
+            //resultado2.setText(imei);
 
             return imei;
 

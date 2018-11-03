@@ -1,4 +1,4 @@
-package com.example.shopper.distribucionapp.View;
+package com.example.shopper.distribucionapp.Controller;
 
 import android.app.IntentService;
 import android.app.Notification;
@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.shopper.distribucionapp.R;
+import com.example.shopper.distribucionapp.View.MapaView;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
@@ -77,12 +78,12 @@ public class GeofenceTransitionService extends IntentService {
         Log.i(TAG, "sendNotification: " + msg );
 
         // Intent to start the main Activity
-        Intent notificationIntent = MainActivity.makeNotificationIntent(
+        Intent notificationIntent = MapaView.makeNotificationIntent(
                 getApplicationContext(), msg
         );
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addParentStack(MapaView.class);
         stackBuilder.addNextIntent(notificationIntent);
         PendingIntent notificationPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 

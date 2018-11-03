@@ -1,4 +1,4 @@
-package com.example.shopper.distribucionapp.View;
+package com.example.shopper.distribucionapp.Controller;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -40,7 +40,7 @@ import static com.example.shopper.distribucionapp.R.id.etfechadespacho;
  * Created by Shopper on 28/03/2018.
  */
 
-public class DespachoEstadoDialogView extends DialogFragment
+public class DespachoEstadoDialogController extends DialogFragment
 
 {
     LoginEntity dSesion = new LoginEntity();

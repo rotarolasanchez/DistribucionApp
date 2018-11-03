@@ -1,7 +1,11 @@
-package com.example.shopper.distribucionapp.View;
+package com.example.shopper.distribucionapp.Controller;
 
 import android.os.AsyncTask;
 
+import com.example.shopper.distribucionapp.Entity.DirectionFinderListener;
+import com.example.shopper.distribucionapp.Entity.Distance;
+import com.example.shopper.distribucionapp.Entity.Duration;
+import com.example.shopper.distribucionapp.Entity.Route;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;

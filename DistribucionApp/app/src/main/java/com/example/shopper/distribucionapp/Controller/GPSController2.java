@@ -1,7 +1,6 @@
 package com.example.shopper.distribucionapp.Controller;
 
 import android.Manifest;
-import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -12,20 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.example.shopper.distribucionapp.Dao.TrackingDao;
-import com.example.shopper.distribucionapp.View.TrackingView;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static android.content.ContentValues.TAG;
 
@@ -52,7 +38,7 @@ public class GPSController2 extends Service implements LocationListener {
 
 
         //location = gpsController.getLocation(location);
-        //trackingView =  new TrackingView();
+        //trackingController =  new TrackingController();
         //trackingDao= new TrackingDao();
         //latitude = location.getLatitude();
         //longitude = location.getLongitude();

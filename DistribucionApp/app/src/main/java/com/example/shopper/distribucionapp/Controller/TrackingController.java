@@ -1,4 +1,4 @@
-package com.example.shopper.distribucionapp.View;
+package com.example.shopper.distribucionapp.Controller;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import com.example.shopper.distribucionapp.R;
  * Created by Shopper on 10/07/2018.
  */
 
-public class TrackingView extends AppCompatActivity {
+public class TrackingController extends AppCompatActivity {
 
 
 

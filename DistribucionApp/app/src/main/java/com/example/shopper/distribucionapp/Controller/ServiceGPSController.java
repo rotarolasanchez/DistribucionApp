@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 import com.example.shopper.distribucionapp.Dao.TrackingDao;
 import com.example.shopper.distribucionapp.Entity.DespachoEstadoEntity;
 import com.example.shopper.distribucionapp.Entity.LoginEntity;
-import com.example.shopper.distribucionapp.View.TrackingView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,7 +33,7 @@ public class ServiceGPSController extends Service {
     Location location;
     double latitude = 0, longitude = 0;
     private GPSController2 gpsController;
-    TrackingView trackingView;
+    TrackingController trackingController;
     LoginEntity dSesion = new LoginEntity();
     DespachoEstadoEntity Destado = new DespachoEstadoEntity();
     TrackingDao trackingDao;
@@ -59,7 +57,7 @@ public class ServiceGPSController extends Service {
 
 
         //location = gpsController.getLocation(location);
-        trackingView =  new TrackingView();
+        trackingController =  new TrackingController();
         trackingDao= new TrackingDao();
         //latitude = location.getLatitude();
         //longitude = location.getLongitude();

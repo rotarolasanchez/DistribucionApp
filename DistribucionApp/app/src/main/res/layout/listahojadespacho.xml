@@ -54,6 +54,9 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/horizontalScrollView" >
 
         <LinearLayout
@@ -62,91 +65,126 @@
             android:layout_height="match_parent">
 
             <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <!--android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp">
-
+                -->
                 <TableRow
                     android:id="@+id/tableRow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp">
-
-                    <TextView
-                        android:id="@+id/lblcodigo"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:text="Código"
-                        style="@android:style/TextAppearance.Widget.TextView"
-                        android:background="@color/accent_material_dark"
-                        android:textAlignment="center"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/lbldesc"
-                        style="@android:style/TextAppearance.Widget.TextView"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="1dp"
-                        android:layout_weight="2"
-                        android:background="@color/accent_material_dark"
-                        android:text="Cliente"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:id="@+id/lblfactura"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Factura"
-                        style="@android:style/TextAppearance.Widget.TextView"
-                        android:background="@color/accent_material_dark"
-                        android:layout_weight="0.6"
-                        android:layout_marginLeft="1dp"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Estado"
-                        android:id="@+id/lblume"
-                        style="@android:style/TextAppearance.Widget.TextView"
-                        android:background="@color/accent_material_dark"
-                        android:layout_weight="0.5"
-                        android:layout_marginLeft="1dp"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Botones"
-                        android:id="@+id/lblstatus"
-                        style="@android:style/TextAppearance.Widget.TextView"
-                        android:background="@color/accent_material_dark"
-                        android:layout_weight="0.5"
-                        android:layout_marginLeft="1dp"
-                        android:textAlignment="center" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Coordenada"
-                        android:id="@+id/lblcoordenada"
-                        style="@android:style/TextAppearance.Widget.TextView"
-                        android:background="@color/accent_material_dark"
-                        android:layout_weight="0.5"
-                        android:layout_marginLeft="1dp"
-                        android:textAlignment="center" />
-
-                </TableRow>
-
-                <ListView
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <!--android:baselineAligned="false"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"-->
+
+
+
+                <TextView
+                    android:id="@+id/lblordendespacho"
+                    android:layout_width="80dp"
                     android:layout_height="match_parent"
-                    android:id="@android:id/list"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp" />
+                    android:text="Orden"
+                    style="@android:style/TextAppearance.Widget.TextView"
+                    android:background="@color/accent_material_dark"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="1dp"
+
+                    >
+
+                </TextView>
+                <!-- android:layout_weight="1"
+                 android:layout_marginBottom="1dp"-->
+                 />
+             <TextView
+                 android:id="@+id/lblcodigo"
+                 android:layout_width="70dp"
+                 android:layout_height="match_parent"
+                 android:text="Codigo"
+                 android:layout_marginLeft="1dp"
+                 style="@android:style/TextAppearance.Widget.TextView"
+                 android:background="@color/accent_material_dark"
+                 android:textAlignment="center"
+                 />
+             <TextView
+                 android:id="@+id/lbldesc"
+                 style="@android:style/TextAppearance.Widget.TextView"
+                 android:layout_width="150dp"
+                 android:layout_height="match_parent"
+                 android:layout_marginLeft="1dp"
+
+                 android:background="@color/accent_material_dark"
+                 android:text="Cliente"
+                 android:textAlignment="center" />
+
+             <TextView
+                 android:id="@+id/lblfactura"
+                 android:layout_width="100dp"
+                 android:layout_height="match_parent"
+                 android:text="Factura"
+                 style="@android:style/TextAppearance.Widget.TextView"
+                 android:background="@color/accent_material_dark"
+
+                 android:layout_marginLeft="1dp"
+                 android:textAlignment="center" />
+
+             <TextView
+                 android:layout_width="100dp"
+                 android:layout_height="match_parent"
+                 android:text="Estado"
+                 android:id="@+id/lblestado"
+                 style="@android:style/TextAppearance.Widget.TextView"
+                 android:background="@color/accent_material_dark"
+
+                 android:layout_marginLeft="1dp"
+                 android:textAlignment="center" />
+
+             <TextView
+                 android:layout_width="70dp"
+                 android:layout_height="match_parent"
+                 android:text="Ubicacion"
+                 android:id="@+id/lblubicacion"
+                 style="@android:style/TextAppearance.Widget.TextView"
+                 android:background="@color/accent_material_dark"
+
+                 android:layout_marginLeft="1dp"
+                 android:textAlignment="center" />
+             <TextView
+                 android:layout_width="80dp"
+                 android:layout_height="match_parent"
+                 android:text="Actualizar"
+                 android:id="@+id/lblactualizar"
+                 style="@android:style/TextAppearance.Widget.TextView"
+                 android:background="@color/accent_material_dark"
+                 android:layout_marginLeft="1dp"
+                 android:textAlignment="center" />
+                 <!--android:layout_weight="0.5"-->
+
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:text="Consultar"
+                        android:id="@+id/lblconsultar"
+                        style="@android:style/TextAppearance.Widget.TextView"
+                        android:background="@color/accent_material_dark"
+                        android:layout_marginLeft="1dp"
+                        android:textAlignment="center" />
+                <!--android:layout_weight="0.5"-->
+
+
+ </TableRow>
+
+ <ListView
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:id="@android:id/list">
+
+ </ListView>
+     <!--android:layout_marginLeft="5dp"
+     android:layout_marginRight="5dp"-->
+
+
             </TableLayout>
         </LinearLayout>
     </HorizontalScrollView>

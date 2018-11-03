@@ -1,4 +1,4 @@
-package com.example.shopper.distribucionapp.View;
+package com.example.shopper.distribucionapp.Entity;
 
 import com.google.android.gms.maps.model.LatLng;
 

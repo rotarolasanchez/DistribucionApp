@@ -21,14 +21,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shopper.distribucionapp.Controller.DirectionFinder;
+import com.example.shopper.distribucionapp.Controller.GeofenceTransitionService;
 import com.example.shopper.distribucionapp.Dao.ListaDespachoDao;
 import com.example.shopper.distribucionapp.Dao.ListaHojaDespachoDao;
+import com.example.shopper.distribucionapp.Entity.DirectionFinderListener;
 import com.example.shopper.distribucionapp.Entity.ListaDespachoEntity;
+import com.example.shopper.distribucionapp.Entity.Route;
 import com.example.shopper.distribucionapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -54,15 +57,10 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
-public class MainActivity extends AppCompatActivity
+public class MapaView extends AppCompatActivity
         implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity
     ListaHojaDespachoDao listaHojaDespachoDao=new ListaHojaDespachoDao();
     ListaDespachoDao listaDespachoDao=new ListaDespachoDao();
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MapaView.class.getSimpleName();
 
     private GoogleMap map;
     private GoogleApiClient googleApiClient;
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity
 
     // Create a Intent send by the notification
     public static Intent makeNotificationIntent(Context context, String msg) {
-        Intent intent = new Intent( context, MainActivity.class );
+        Intent intent = new Intent( context, MapaView.class );
         intent.putExtra( NOTIFICATION_MSG, msg );
         return intent;
     }

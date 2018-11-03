@@ -1,4 +1,6 @@
-package com.example.shopper.distribucionapp.View;
+package com.example.shopper.distribucionapp.Entity;
+
+import com.example.shopper.distribucionapp.Entity.Route;
 
 import java.util.List;
 

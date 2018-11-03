@@ -1,6 +1,5 @@
 package com.example.shopper.distribucionapp.View;
 
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,11 +14,9 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.shopper.distribucionapp.Controller.Constants;
-import com.example.shopper.distribucionapp.Controller.GPSController;
+import com.example.shopper.distribucionapp.Controller.DespachoEstadoDialogController;
 import com.example.shopper.distribucionapp.Controller.ServiceGPSController;
 import com.example.shopper.distribucionapp.R;
-
-import java.util.ServiceConfigurationError;
 
 /**
  * Created by icruz on 27/05/2016.
@@ -27,7 +24,7 @@ import java.util.ServiceConfigurationError;
 public class MenuView extends AppCompatActivity {
     private ImageButton ibtn9,ibtn;
     ServiceGPSController serviceGPSController = new ServiceGPSController();
-    IndicatorView indicatorView = new IndicatorView();
+    IndicatorNCDView indicatorNCDView = new IndicatorNCDView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,7 @@ public class MenuView extends AppCompatActivity {
         ibtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent j= new Intent(getApplicationContext(), IndicatorView.class);
+                Intent j= new Intent(getApplicationContext(), IndicatorMenuView.class);
                 startActivity(j);
 
                 //startService(new Intent(getBaseContext(),ServiceGPSController.class));
@@ -85,7 +82,7 @@ public class MenuView extends AppCompatActivity {
 
     public void ActualizaDespacho()
     {
-        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogView();
+        android.support.v4.app.DialogFragment dialogFragment = new DespachoEstadoDialogController();
         dialogFragment.show(getSupportFragmentManager(),"un dialogo");
     }
 
