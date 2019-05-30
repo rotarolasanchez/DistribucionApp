@@ -56,7 +56,7 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
         txtusu = (EditText) findViewById(R.id.txtusu);
         btnlogin = (Button) findViewById(R.id.btnlogin);
         resultado = (TextView)findViewById(R.id.txtresultado);
-        resultado2 = (TextView)findViewById(R.id.txtresultado2);
+
         manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         btnlogin.setOnClickListener(this);
     }

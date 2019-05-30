@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context=".View.LoginView">
 
 
@@ -12,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView3"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -19,7 +22,9 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            >
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -31,76 +36,88 @@
                     android:layout_height="126dp"
                     android:id="@+id/imageView"
                     android:src="@mipmap/logo_vistony_hotizontal_para_fondo_blanco"
-                    android:layout_weight="10.08" />
+                    android:layout_weight="6.86" />
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/organizacion_48" />
 
                 <Spinner
                     android:id="@+id/spncompania"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="0dp"
                     android:layout_weight="4"
                     android:entries="@array/Compania"
-                    android:textAlignment="gravity" />
+                    android:textAlignment="gravity"
+
+                    />
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/txtusu"
-                    android:hint="Usuario"
-                    android:editable="true"
-                    android:enabled="true"
-                    android:layout_weight="4"
-                    android:layout_marginTop="10dp"
-                    android:textAlignment="center" />
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:src="@mipmap/usuario_48" />
+
+
+                    <EditText
+                        android:id="@+id/txtusu"
+                        android:layout_width="275dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="0dp"
+                        android:editable="true"
+                        android:enabled="true"
+                        android:hint="Usuario"
+                        android:textAlignment="center" />
+
             </LinearLayout>
+
+
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/button1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:layout_marginTop="30dp"
+                >
+
+
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:text="INGRESAR"
                     android:id="@+id/btnlogin"
-                    android:layout_weight="4"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LOGIN"
+                    android:background="@color/Rojo_Vistony"
+                    android:textColor="@color/white"
 
-                <TextView
-                    android:id="@+id/txtresultado"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="4" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    />
 
-                <TextView
-                    android:id="@+id/txtresultado2"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="4" />
             </LinearLayout>
+
+
+
         </LinearLayout>
     </ScrollView>
 

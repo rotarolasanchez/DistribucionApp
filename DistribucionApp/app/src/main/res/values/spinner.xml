@@ -2,9 +2,9 @@
 <resources>
 
     <string-array name="Compania" >
+        <item >Elegir Compañia</item>
         <item >01-VISTONY S.A.C.</item>
-        <item >03-TOLBRIN S.A.C.</item>
-        <item >10-SKOL S.A.C.</item>
+        <item >11-BLUKER S.A.C.</item>
         <!-- <item >06-COILSA S.A.C.</item>
         <item >50-INDUVIS COMPAÑIA INDUSTRIAL DEL ECUADOR S.A.</item>
         <item >51-INDUVIS CIA INDUSTRIAL DE PARAGUAY S.A.</item>
